@@ -10,7 +10,32 @@
 </head>
 <body>
   <div class="master-container js-master-container">
-
+    <div class="hidden js-add-form">
+      <form class="create-bookmark-form">
+        <input type="text" class="bookmark-title" name="title" placeholder="title" required>
+        <input type="text" class="url-input" name="url" placeholder="website link" required>
+        <input type="text" class="description-input" name="description" placeholder="describe the site" required>
+        <select id="rating-input" name="rating" value="Give a Rating" required>
+          <option value="5">5 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Star</option>
+        </select>
+      </form>
+    </div>
+    <div class="main-view js-main-view">
+      <form class="add-bookmark-wrapper">
+        <input type="button" class="add-bookmark-button" value="Submit!">
+      </form>
+      <select id="filter-rating" name="filter" value="Minimum Rating">
+        <option value="5">5 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="3">3 Stars</option>
+        <option value="2">2 Stars</option>
+        <option value="1">1 Star</option>
+      </select>
+    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
