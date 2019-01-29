@@ -6,11 +6,11 @@ const STORE = (function() {
   // list array in STORE contains objects for each bookmark in this format:
   // { id: 1, title:'article on cats', description: 'I like cats', url: 'ilikecats.com', rating: 5, expanded: true  }
 
-  const adding = function(boolean) {
-    return boolean;
+  const addItem = function(item) {
+    this.list.push(item);
   };
 
-  const hidden = function(boolean) {
+  const adding = function(boolean) {
     return boolean;
   };
 
@@ -21,8 +21,9 @@ const STORE = (function() {
 
   return {
     list: [],
+    addItem,
     adding,
     expanded,
-    hidden,
+    hidden: false,
   };
 }());

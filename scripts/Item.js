@@ -7,7 +7,8 @@ const Item = (function () {
       title,
       url,
       desc,
-      rating
+      rating,
+      hidden: false
     };
   };
 
