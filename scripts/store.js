@@ -14,7 +14,7 @@ const STORE = function() {
 
   const expanded = function(id, boolean) {
     const selectedItem = list.findById(id);
-    selectedItem.expanded = boolean;
+    selectedItem.expanded = boolean; //make sure to toggle back at some point
   };
 
   return {

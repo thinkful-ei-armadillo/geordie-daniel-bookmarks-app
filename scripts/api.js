@@ -5,3 +5,12 @@
 // { id: 1, title:'article on cats', description: 'I like cats', url: 'ilikecats.com', rating: 5  }
 // expanded state gets added in STORE
 
+const api = function() {
+
+  const list = [  ];
+
+  return {
+    list,
+
+  };
+};
