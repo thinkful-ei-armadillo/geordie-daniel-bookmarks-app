@@ -1,4 +1,5 @@
 'use strict';
+/* global cuid */
 
 const Item = (function () {
   const create = function(title, url, desc, rating) {

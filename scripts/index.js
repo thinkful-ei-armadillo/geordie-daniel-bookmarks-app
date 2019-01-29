@@ -1,5 +1,5 @@
 'use strict';
-/* global $ STORE api */
+/* global $ STORE api bookmarks */
 
 $(document).ready( function(event) {
   console.log(bookmarks);
