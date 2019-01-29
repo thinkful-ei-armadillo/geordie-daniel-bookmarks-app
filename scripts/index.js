@@ -2,6 +2,6 @@
 /* global $ STORE api */
 
 $(document).ready( function() {
-  
+  renderTheBookmarkApp();
 
 });
