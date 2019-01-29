@@ -6,7 +6,7 @@ $(document).ready( function(event) {
   bookmarks.bindListeners();
   api.getItems()
     .then((items) => {
-      items.forEach((item) => STORE.list.addItem(item));
+      items.forEach((item) => STORE.addItem(item));
       
       bookmarks.bindListeners();
       
