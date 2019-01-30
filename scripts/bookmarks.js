@@ -13,7 +13,7 @@ const bookmarks = (function() {
     <form class="create-bookmark-form js-create-bookmark-form">
     <input type="text" class="bookmark-title" name="title" placeholder="title" required>
     <input type="text" class="url-input" name="url" placeholder="website link" value="https://" required>
-    <input type="text" class="description-input" name="description" placeholder="describe the site" required>
+    <input type="text" class="description-input" name="description" placeholder="description" required>
     <select id="rating-input" name="rating" value="Give a Rating" required>
       <option value="">Give a Rating</option>
       <option value="5">5 Stars</option>

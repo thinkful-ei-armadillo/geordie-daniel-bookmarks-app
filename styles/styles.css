@@ -1,16 +1,21 @@
+html {
+  background: radial-gradient(#ececec, #27476E);
+}
+
 .hidden {
   display: none;
 }
 
-button, select {
+button, select, input {
   background-color: #FAFBFC;
   border-radius: 4px;
+  height: 20px;
+  font-size: 12px;
 }
 
 body {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
-  background-color: #27476E;
   color: #fff;
 }
 
@@ -21,7 +26,6 @@ body {
 
 .header {
   margin: 0 auto;
-  background-color: 006992;
 }
 
 h1 {
@@ -30,6 +34,7 @@ h1 {
 
 .bookmark-list {
   margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .bookmark-li {
@@ -39,13 +44,15 @@ h1 {
   list-style: none;
   border: 2px solid #ED8A19;
   padding: 30px;
-  box-shadow: 4px 4px #001D4A;
+  box-shadow: 4px 4px #27476E;
   border-radius: 6px;
 }
 
 .bookmark-li > h3 {
   margin: 5px;
   text-shadow: 2px 2px #333;
+  font-weight: 100;
+  font-size: 24px;
 }
 
 .bookmark-li > p {
