@@ -11,13 +11,23 @@ const STORE = (function() {
   };
 
   const findById = function(id) {
-    console.log(`find by id has found ${id}`);
-    return STORE.list.find(list => list.id === id);
+    return function (list) {
+      for ( let i = 0; i < STORE.list; i++ ) {
+        if ( list[i].id === id ) {
+          console.log(list[i]);
+          console.log(`find by id has found ${id} at ${list[i]}`);
+          return list[i];
+        }
+      }
+    };
   };
 
   const expanded = function(id) {
     const selectedItem = STORE.findById(id);
+    console.log(selectedItem);
+    console.log(selectedItem.expand);
     selectedItem.expand = !selectedItem.expand;
+    console.log(selectedItem.expand);
   };
 
   return {

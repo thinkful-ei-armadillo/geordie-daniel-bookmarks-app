@@ -67,18 +67,42 @@ const bookmarks = (function() {
   };
 
   const htmlTheBookmark = function(bookmark){
-    $('.bookmark-list').append(`
-          <li class="bookmark-li" id="${bookmark.id}">
+    if ( bookmark.expand ) {
+      $('.bookmark-list').closest('li').html(`
+    <li class="bookmark-li" id="${bookmark.id}">
         <h3 class="bookmark-title">${bookmark.title}</h3>
+        <p class="description hidden">
+          ${bookmark.desc}
+        </p>
+        <a href=${bookmark.url}><button class="bookmark-link hidden">
+          Visit Site
+        </button></a>
+        <button class="delete-bookmark hidden">Delete</button>
         <div class="rating-view">
+          ${bookmark.rating}
           <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
           <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
           <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
           <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating empty">
+          <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
         </div>
       </li>
-          `);
+    `);
+    }
+    else {
+      $('.bookmark-list').append(`
+            <li class="bookmark-li" id="${bookmark.id}">
+          <h3 class="bookmark-title">${bookmark.title}</h3>
+          <div class="rating-view">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating empty">
+          </div>
+        </li>
+            `);
+    }
     bindListeners();
   };
 
@@ -118,30 +142,30 @@ const bookmarks = (function() {
       const id = $(event.currentTarget).attr('id');
       const currentItem = STORE.findById(id);
 
-      console.log(id);
+      console.log(currentItem);
 
-      STORE.expanded(currentItem);
+      STORE.expanded(id);
 
-      $('.bookmark-list').closest('li').html(`
-    <li class="bookmark-li" id="${currentItem.id}">
-        <h3 class="bookmark-title">${currentItem.title}</h3>
-        <p class="description hidden">
-          ${currentItem.desc}
-        </p>
-        <a href=${currentItem.url}><button class="bookmark-link hidden">
-          Visit Site
-        </button></a>
-        <button class="delete-bookmark hidden">Delete</button>
-        <div class="rating-view">
-          ${currentItem.rating}
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-        </div>
-      </li>
-    `);
+    //   $('.bookmark-list').closest('li').html(`
+    // <li class="bookmark-li" id="${currentItem.id}">
+    //     <h3 class="bookmark-title">${currentItem.title}</h3>
+    //     <p class="description hidden">
+    //       ${currentItem.desc}
+    //     </p>
+    //     <a href=${currentItem.url}><button class="bookmark-link hidden">
+    //       Visit Site
+    //     </button></a>
+    //     <button class="delete-bookmark hidden">Delete</button>
+    //     <div class="rating-view">
+    //       ${currentItem.rating}
+    //       <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+    //       <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+    //       <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+    //       <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+    //       <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+    //     </div>
+    //   </li>
+    // `);
       bindListeners();
     });
   };
@@ -166,7 +190,8 @@ const bookmarks = (function() {
         const deletionId = STORE.list[i].id;
         api.deleteItem(deletionId);
       }
-      render();
+      bindListeners();
+      // render();
     });
   };
 
@@ -175,11 +200,33 @@ const bookmarks = (function() {
   const render = function() {
     console.log('`render` ran');
     let items = [...STORE.list];
-    if (STORE.hidden) {
+    if ( items.hidden ) {
       items = items.filter(item => !item.hidden);
     }
-    if (STORE.rating <= $('#filter-rating').val()) {
+    if ( items.rating <= $('#filter-rating').val() ) {
       items = items.filter(item => item.rating.includes(this));
+    }
+    if ( items.expand ) {
+      $('.bookmark-li').html(`
+      <li class="bookmark-li" id="${items.id}">
+          <h3 class="bookmark-title">${items.title}</h3>
+          <p class="description hidden">
+            ${items.desc}
+          </p>
+          <a href=${items.url}><button class="bookmark-link hidden">
+            Visit Site
+          </button></a>
+          <button class="delete-bookmark hidden">Delete</button>
+          <div class="rating-view">
+            ${items.rating}
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+          </div>
+        </li>
+      `);
     }
     
     for ( let i = 0; i < STORE.list.length; i++ ) {

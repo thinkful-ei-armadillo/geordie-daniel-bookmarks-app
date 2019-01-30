@@ -41,6 +41,9 @@ const api = (function() {
       headers: new Headers({ 'Content-Type': 'application/json' }), 
       body: newItem } );
   };
+
+  // saving this for later - may need for extension goal
+
   // const updateItem = function( id, updateData ) {
   //   return listApiFetch( `${BASE_URL}/bookmarks/${id}`, {
   //     method: 'PATCH',
@@ -48,6 +51,7 @@ const api = (function() {
   //     body: JSON.stringify( updateData )
   //   } );
   // };
+  
   const deleteItem = function (id){
     return listApiFetch( `${BASE_URL}/bookmarks/${id}`, {
       method: 'DELETE',
