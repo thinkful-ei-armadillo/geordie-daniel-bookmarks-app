@@ -20,7 +20,7 @@ body {
   list-style: none;
   border: 2px solid #777;
   margin: 10px;
-  padding: 10px;
+  padding: 30px;
   box-shadow: 2px 2px #e0e0e0;
 }
 
@@ -41,5 +41,4 @@ body {
 
 .js-expand {
   float: right;
-  margin-bottom: 75px;
 }
