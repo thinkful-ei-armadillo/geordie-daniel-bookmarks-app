@@ -63,3 +63,25 @@ function handleSubmit(e) {
 }
 
 ````
+
+## 2 minute presentation
+
+Our bookmarks app is coming along well - we have achieved successful: 
+* Bookmark creation
+    * Switches the main view from "add bookmark" and "minimum rating" button/selections to a form to input new bookmark details.
+    * Includes title, url, description, and rating fields
+    * Switches main view back on submit
+* Default condensed view
+* API GETs
+* API POSTs
+* API DELETEs (in two forms, individual delete button and clear all bookmarks)
+
+To Complete Today:
+* Expand/detailed view
+   * Originally attempted by using toggleClass( hidden ), but this would only work in one direction. Now attempting by re-rendering the selected item with our template function.
+   * Ensure that it switches back to condensed view on re-click
+* Filtered view with minimum rating
+* Get "Visit Site" button/link working
+* Starring dynamically by reading current STORE.list.rating value and rendering appropriate number of stars accordingly.
+* User-side feedback for error handling
+* Beautify with CSS
