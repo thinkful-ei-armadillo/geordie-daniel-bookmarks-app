@@ -82,7 +82,7 @@ const bookmarks = (function() {
           <p class="description">
             ${bookmark.desc}
           </p>
-          <a href=${bookmark.url}><button class="bookmark-link">
+          <a href=${bookmark.url} target="_blank"><button class="bookmark-link">
             Visit Site
           </button></a>
           <button class="delete-bookmark">Delete</button>
