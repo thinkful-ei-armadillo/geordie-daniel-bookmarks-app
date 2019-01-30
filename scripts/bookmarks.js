@@ -71,7 +71,11 @@ const bookmarks = (function() {
           <li class="bookmark-li" id="${bookmark.id}">
         <h3 class="bookmark-title">${bookmark.title}</h3>
         <div class="rating-view">
-          ${bookmark.rating}
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating empty">
         </div>
       </li>
           `);
@@ -130,6 +134,11 @@ const bookmarks = (function() {
         <button class="delete-bookmark hidden">Delete</button>
         <div class="rating-view">
           ${currentItem.rating}
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
         </div>
       </li>
     `);
