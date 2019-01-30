@@ -50,8 +50,11 @@ const bookmarks = (function() {
 
       STORE.list.push(bookmarkObj);
       api.createItem(bookmarkTitle, bookmarkUrl, bookmarkDesc, bookmarkRating);
-
+      
+      // create HTML bookmark with new stored values
       htmlTheBookmark(bookmarkObj);
+
+      // reload standard main view once submit completes
       $('.js-main-view').html(`
         <button class="add-bookmark-button" value="Add Bookmark">Add Bookmark</button>
           <select id="filter-rating" name="filter" value="Minimum Rating">

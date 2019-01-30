@@ -99,6 +99,7 @@ const id = $(event.currentTarget).attr('id');
 const currentItem = STORE.findById(id);
 
 
+use button for expanding items?? easier to target for user, more accessible
 
 
 
