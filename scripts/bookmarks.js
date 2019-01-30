@@ -68,30 +68,33 @@ const bookmarks = (function() {
 
   const htmlTheBookmark = function(bookmark){
     if ( bookmark.expand ) {
-      $('.bookmark-list').closest('li').html(`
-    <li class="bookmark-li" id="${bookmark.id}">
-        <h3 class="bookmark-title">${bookmark.title}</h3>
-        <p class="description hidden">
-          ${bookmark.desc}
-        </p>
-        <a href=${bookmark.url}><button class="bookmark-link hidden">
-          Visit Site
-        </button></a>
-        <button class="delete-bookmark hidden">Delete</button>
-        <div class="rating-view">
-          ${bookmark.rating}
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-          <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-        </div>
-      </li>
-    `);
+      $('.js-bookmark-list').children('.js-bookmark-li').html(`
+      <div class="bookmark-item-wrapper js-bookmark-item-wrapper">
+        <li class="bookmark-li" id="${bookmark.id}">
+          <h3 class="bookmark-title">${bookmark.title}</h3>
+          <p class="description hidden">
+            ${bookmark.desc}
+          </p>
+          <a href=${bookmark.url}><button class="bookmark-link hidden">
+            Visit Site
+          </button></a>
+          <button class="delete-bookmark hidden">Delete</button>
+          <div class="rating-view">
+            ${bookmark.rating}
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+          </div>
+        </li>
+      </div>
+      `);
     }
     else {
       $('.bookmark-list').append(`
-            <li class="bookmark-li" id="${bookmark.id}">
+      <div class="bookmark-item-wrapper">
+          <li class="bookmark-li" id="${bookmark.id}">
           <h3 class="bookmark-title">${bookmark.title}</h3>
           <div class="rating-view">
             <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
@@ -101,6 +104,7 @@ const bookmarks = (function() {
             <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating empty">
           </div>
         </li>
+        </div>
             `);
     }
     bindListeners();
@@ -146,6 +150,8 @@ const bookmarks = (function() {
 
       STORE.expanded(id);
 
+      htmlTheBookmark(currentItem);
+
     //   $('.bookmark-list').closest('li').html(`
     // <li class="bookmark-li" id="${currentItem.id}">
     //     <h3 class="bookmark-title">${currentItem.title}</h3>
@@ -167,6 +173,7 @@ const bookmarks = (function() {
     //   </li>
     // `);
       bindListeners();
+      
     });
   };
 
