@@ -78,7 +78,7 @@ Our bookmarks app is coming along well - we have achieved successful:
 
 To Complete Today:
 * ~~Fix issue with first JSON object printing twice~~
-* Expand/detailed view
+* ~~Expand/detailed view~~~
    * Originally attempted by using toggleClass( hidden ), but this would only work in one direction. Now attempting by re-rendering the selected item with our template function.
    * Ensure that it switches back to condensed view on re-click
 * Filtered view with minimum rating

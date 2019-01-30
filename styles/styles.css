@@ -39,6 +39,6 @@ body {
   height: 10px;
 }
 
-.js-expand {
+.expand-button, .close-button {
   float: right;
 }

@@ -87,98 +87,66 @@ const bookmarks = (function() {
           </button></a>
           <button class="delete-bookmark">Delete</button>
           <div class="rating-view">
-            ${bookmark.rating}
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+            ${ratingRender(bookmark.rating)}
           </div>
-          <button for="expand" class="expand-button js-expand">-</button>
+          <button for="expand" class="close-button js-close">-</button>
         </li>
       </div>
       `;
     }
-    else if ( bookmark.rating === 5 ) {
+    else {
       return `
       <div class="bookmark-item-wrapper">
           <li class="bookmark-li" id="${bookmark.id}">
           <h3 class="bookmark-title">${bookmark.title}</h3>
           <div class="rating-view">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+          ${ratingRender(bookmark.rating)}
           </div>
           <button for="expand" class="expand-button js-expand">+</button>
         </li>
         </div>
             `;}
-    else if ( bookmark.rating === 4 ) {
+  };
+
+  // rating handling function
+
+  const ratingRender = function(rating) {
+    if ( rating === 5 ) {
+      return `<img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">`;
+    }
+    else if ( rating === 4 ) {
       return `
-              <div class="bookmark-item-wrapper">
-                  <li class="bookmark-li" id="${bookmark.id}">
-                  <h3 class="bookmark-title">${bookmark.title}</h3>
-                  <div class="rating-view">
+      <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
                     <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
                     <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
                     <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-                  </div>
-                  <button for="expand" class="expand-button js-expand">+</button>
-                </li>
-                </div>
-                    `;}
-    else if ( bookmark.rating === 3 ) {
-      return `
-                              <div class="bookmark-item-wrapper">
-                                  <li class="bookmark-li" id="${bookmark.id}">
-                                  <h3 class="bookmark-title">${bookmark.title}</h3>
-                                  <div class="rating-view">
-                                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-                                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-                                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-                                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-                                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-                                  </div>
-                                  <button for="expand" class="expand-button js-expand">+</button>
-                                </li>
-                                </div>
-                                    `;}
-    else if ( bookmark.rating === 2 ) {
-      return `
-      <div class="bookmark-item-wrapper">
-          <li class="bookmark-li" id="${bookmark.id}">
-          <h3 class="bookmark-title">${bookmark.title}</h3>
-          <div class="rating-view">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-          </div>
-          <button for="expand" class="expand-button js-expand">+</button>
-        </li>
-        </div>
-            `;}
-    else if ( bookmark.rating === 1 ) {
-      return `
-              <div class="bookmark-item-wrapper">
-                  <li class="bookmark-li" id="${bookmark.id}">
-                  <h3 class="bookmark-title">${bookmark.title}</h3>
-                  <div class="rating-view">
-                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
-                  </div>
-                  <button for="expand" class="expand-button js-expand">+</button>
-                </li>
-                </div>
-                    `;}
+                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">`;
+    }
+    else if ( rating === 3 ) {
+      return `<img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">`;
+    }
+    else if ( rating === 2 ) {
+      return `<img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">`;
+    }
+    else if ( rating === 1 ) {
+      return `<img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+      <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">`;
+    }
   };
 
   // filter funtion, event listener on selection value of dropdown "minimum rating", only show certain LIs
@@ -213,14 +181,17 @@ const bookmarks = (function() {
 
         STORE.setExpanded(currentItem.id);
         console.log(STORE.expanded);
+        // $('.js-expand').toggleClass('js-expand', true);
         render();
+        detailViewClosed();
       }
     });
   };
 
   const detailViewClosed = function() {
     if ( STORE.expanded !== null ) {
-      $('.js-bookmark-list').on('click', '.js-expand', function(event) {
+      console.log( 'close it up' );
+      $('.js-bookmark-list').on('click', '.js-close', function(event) {
         event.preventDefault();
         console.log( 'close it up' );
         // set expanded back to null after expanded in render
@@ -284,7 +255,7 @@ const bookmarks = (function() {
   const bindListeners = function() {
     listenToAddBookmark();
     detailView();
-    detailViewClosed();
+    // detailViewClosed();
     filterByRating();
     deleteBookmark();
     clearAllBookmarks();
