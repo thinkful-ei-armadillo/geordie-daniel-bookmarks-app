@@ -240,8 +240,9 @@ const bookmarks = (function() {
       const currentItem = $(event.currentTarget).closest('li').attr('id');
       console.log(currentItem);
       $(event.currentTarget).closest('li').remove();
-      STORE.
-        api.deleteItem(currentItem);
+      const currentItemInStore = STORE.findById(currentItem);
+      STORE.list.splice(STORE.list.indexOf(currentItemInStore), 1);
+      api.deleteItem(currentItem);
       render();
     });
   };
@@ -250,7 +251,9 @@ const bookmarks = (function() {
     $('.js-main-view').on( 'click', '.js-clear-all', function() {
       for ( let i = 0; i , STORE.list.length; i++ ){
         const deletionId = STORE.list[i].id;
+        // STORE.findById(deletionId).splice(STORE.list.indexOf(deletionId), 1);
         api.deleteItem(deletionId);
+        render();
       }
     });
   };
@@ -272,7 +275,7 @@ const bookmarks = (function() {
     }
     const bookmarkElements= [];
 
-    for ( let i = 0; i < (items.length - 1); i++ ) {
+    for ( let i = 0; i < (items.length); i++ ) {
       bookmarkElements.push(htmlTheBookmark( items[i] ));
     }
     $('.js-bookmark-list').html(bookmarkElements);

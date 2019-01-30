@@ -82,7 +82,7 @@ To Complete Today:
    * Originally attempted by using toggleClass( hidden ), but this would only work in one direction. Now attempting by re-rendering the selected item with our template function.
    * Ensure that it switches back to condensed view on re-click
 * Filtered view with minimum rating
-* Get "Visit Site" button/link working
+* ~~Get "Visit Site" button/link working
 * ~~Starring dynamically by reading current STORE.list.rating value and rendering appropriate number of stars accordingly.~~
 * User-side feedback for error handling
 * Beautify with CSS
