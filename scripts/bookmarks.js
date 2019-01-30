@@ -39,6 +39,7 @@ const bookmarks = (function() {
       const bookmarkUrl = $('.url-input').val();
       const bookmarkDesc = $('.description-input').val();
       const bookmarkRating = $('#rating-input').val();
+      console.log(bookmarkRating);
 
       // const bookmarkObjData = $(this).serializeJson();
 
@@ -149,19 +150,28 @@ const bookmarks = (function() {
     }
   };
 
+  const filterByRating= function(rating){
+    for (let i = 0; i < STORE.list.length; i++){
+      if(STORE.list[i].rating <= rating-1){
+        STORE.list[i].hidden = true;
+        console.log(STORE.list[i]);
+      }
+      else{
+        STORE.list[i].hidden = false;
+      }
+    }
+  };
+
+
   // filter funtion, event listener on selection value of dropdown "minimum rating", only show certain LIs
   // replace this functionality by doing it in the new render function
-  const filterByRating = function() {
+  const handleFilter = function() {
     $('.js-main-view').on( 'change', '#filter-rating', function(event) {
       event.preventDefault();
       const filterBy = $('#filter-rating').val();
       console.log(filterBy);
-      for ( let i = 0; i < STORE.list.length; i++ ){
-        if ( STORE.list[i].rating < filterBy ) {
-          STORE.list[i].hidden = true;
-        }
-      }
-      // STORE.list.rating.filter(filterBy)
+      filterByRating(filterBy);
+      render();
     } );
   };
 
@@ -235,15 +245,9 @@ const bookmarks = (function() {
     console.log('`render` ran');
 
     let items = [...STORE.list];
+    
+    items = items.filter(item => !item.hidden);
 
-    console.log(items);
-
-    if ( items.hidden ) {
-      items = items.filter(item => !item.hidden);
-    }
-    if ( items.rating <= $('#filter-rating').val() ) {
-      items = items.filter(item => item.rating.includes(this));
-    }
     const bookmarkElements= [];
 
     for ( let i = 0; i < (items.length); i++ ) {
@@ -255,8 +259,8 @@ const bookmarks = (function() {
   const bindListeners = function() {
     listenToAddBookmark();
     detailView();
-    // detailViewClosed();
-    filterByRating();
+    ratingRender();
+    handleFilter();
     deleteBookmark();
     clearAllBookmarks();
   };
