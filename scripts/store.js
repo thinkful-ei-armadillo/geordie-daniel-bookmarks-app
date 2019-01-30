@@ -11,16 +11,17 @@ const STORE = (function() {
   };
 
   const findById = function(id) {
+    console.log(`find by id has found ${id}`);
     return STORE.list.find(list => list.id === id);
   };
 
   const expanded = function(id) {
     const selectedItem = STORE.findById(id);
-    STORE.expanded = !STORE.expanded; //make sure to toggle back at some point
+    selectedItem.expand = !selectedItem.expand;
   };
 
   return {
-    list: [],
+    list: [ ],
     addItem,
     expanded,
     hidden: false,

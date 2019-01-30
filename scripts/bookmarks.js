@@ -61,13 +61,14 @@ const bookmarks = (function() {
             <option value="3">3 Stars</option>
             <option value="2">2 Stars</option>
             <option value="1">1 Star</option>
-          </select>`);
+          </select>
+          <button class="clear-all js-clear-all">Clear All Bookmarks</button>`);
     } );
   };
 
   const htmlTheBookmark = function(bookmark){
     $('.bookmark-list').append(`
-          <li class="bookmark-li">
+          <li class="bookmark-li" id="${bookmark.id}">
         <h3 class="bookmark-title">${bookmark.title}</h3>
         <div class="rating-view">
           ${bookmark.rating}
@@ -94,11 +95,11 @@ const bookmarks = (function() {
     } );
   };
 
-  const getItemIdFromElement = function(item) {
-    return $(item)
-      .closest('.js-item-element')
-      .data('item-id');
-  };
+  // const getItemIdFromElement = function(item) {
+  //   return $(item)
+  //     .closest('.js-item-element')
+  //     .data('item-id');
+  // };
 
   // detailed view function, event listener on click of LI to expand into detailed view, should work in
   // both filtered and non-filtered views
@@ -110,7 +111,7 @@ const bookmarks = (function() {
     // $('.bookmark-link').toggleClass('hidden');
     // $('.delete-bookmark').toggleClass('hidden');
       
-      const id = $(event.currentTarget).closest('h3') ;
+      const id = $(event.currentTarget).attr('id');
       const currentItem = STORE.findById(id);
 
       console.log(id);
@@ -118,7 +119,7 @@ const bookmarks = (function() {
       STORE.expanded(currentItem);
 
       $('.bookmark-list').closest('li').html(`
-    <li class="bookmark-li">
+    <li class="bookmark-li" id="${currentItem.id}">
         <h3 class="bookmark-title">${currentItem.title}</h3>
         <p class="description hidden">
           ${currentItem.desc}
@@ -150,6 +151,16 @@ const bookmarks = (function() {
     });
   };
 
+  const clearAllBookmarks = function() {
+    $('.js-main-view').on( 'click', '.js-clear-all', function() {
+      for ( let i = 0; i , STORE.list.length; i++ ){
+        const deletionId = STORE.list[i].id;
+        api.deleteItem(deletionId);
+      }
+      render();
+    });
+  };
+
   // render function tying things together based upon store booleans
 
   const render = function() {
@@ -173,6 +184,7 @@ const bookmarks = (function() {
     detailView();
     filterByRating();
     deleteBookmark();
+    clearAllBookmarks();
   };
 
   return {
