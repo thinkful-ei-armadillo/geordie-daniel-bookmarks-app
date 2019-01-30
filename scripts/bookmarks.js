@@ -40,7 +40,9 @@ const bookmarks = (function() {
       const bookmarkDesc = $('.description-input').val();
       const bookmarkRating = $('#rating-input').val();
 
-      console.log(bookmarkRating);
+      // const bookmarkObjData = $(this).serializeJson();
+
+      // console.log(bookmarkObjData.rating);
 
       const bookmarkObj = Item.create(bookmarkTitle, bookmarkUrl, 
         bookmarkDesc, bookmarkRating);
@@ -52,7 +54,7 @@ const bookmarks = (function() {
       api.createItem(bookmarkTitle, bookmarkUrl, bookmarkDesc, bookmarkRating);
       
       // create HTML bookmark with new stored values
-      htmlTheBookmark(bookmarkObj);
+      render();
 
       // reload standard main view once submit completes
       $('.js-main-view').html(`
@@ -71,18 +73,19 @@ const bookmarks = (function() {
 
   // translate bookmark into HTML
   const htmlTheBookmark = function(bookmark){
-    if ( bookmark.expand ) {
-      $('.js-bookmark-item-wrapper').html(`
+    if ( STORE.expanded === bookmark.id ) {
+      console.log( 'if statement for expanded id works' );
+      return `
       <div class="bookmark-item-wrapper js-bookmark-item-wrapper">
         <li class="bookmark-li" id="${bookmark.id}">
           <h3 class="bookmark-title">${bookmark.title}</h3>
-          <p class="description hidden">
+          <p class="description">
             ${bookmark.desc}
           </p>
-          <a href=${bookmark.url}><button class="bookmark-link hidden">
+          <a href=${bookmark.url}><button class="bookmark-link">
             Visit Site
           </button></a>
-          <button class="delete-bookmark hidden">Delete</button>
+          <button class="delete-bookmark">Delete</button>
           <div class="rating-view">
             ${bookmark.rating}
             <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
@@ -91,12 +94,13 @@ const bookmarks = (function() {
             <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
             <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
           </div>
+          <button for="expand" class="expand-button js-expand">-</button>
         </li>
       </div>
-      `);
+      `;
     }
-    else {
-      $('.bookmark-list').append(`
+    else if ( bookmark.rating === 5 ) {
+      return `
       <div class="bookmark-item-wrapper">
           <li class="bookmark-li" id="${bookmark.id}">
           <h3 class="bookmark-title">${bookmark.title}</h3>
@@ -105,13 +109,76 @@ const bookmarks = (function() {
             <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
             <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
             <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
-            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating empty">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
           </div>
+          <button for="expand" class="expand-button js-expand">+</button>
         </li>
         </div>
-            `);
-    }
-
+            `;}
+    else if ( bookmark.rating === 4 ) {
+      return `
+              <div class="bookmark-item-wrapper">
+                  <li class="bookmark-li" id="${bookmark.id}">
+                  <h3 class="bookmark-title">${bookmark.title}</h3>
+                  <div class="rating-view">
+                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+                  </div>
+                  <button for="expand" class="expand-button js-expand">+</button>
+                </li>
+                </div>
+                    `;}
+    else if ( bookmark.rating === 3 ) {
+      return `
+                              <div class="bookmark-item-wrapper">
+                                  <li class="bookmark-li" id="${bookmark.id}">
+                                  <h3 class="bookmark-title">${bookmark.title}</h3>
+                                  <div class="rating-view">
+                                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+                                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+                                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+                                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+                                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+                                  </div>
+                                  <button for="expand" class="expand-button js-expand">+</button>
+                                </li>
+                                </div>
+                                    `;}
+    else if ( bookmark.rating === 2 ) {
+      return `
+      <div class="bookmark-item-wrapper">
+          <li class="bookmark-li" id="${bookmark.id}">
+          <h3 class="bookmark-title">${bookmark.title}</h3>
+          <div class="rating-view">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+            <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+          </div>
+          <button for="expand" class="expand-button js-expand">+</button>
+        </li>
+        </div>
+            `;}
+    else if ( bookmark.rating === 1 ) {
+      return `
+              <div class="bookmark-item-wrapper">
+                  <li class="bookmark-li" id="${bookmark.id}">
+                  <h3 class="bookmark-title">${bookmark.title}</h3>
+                  <div class="rating-view">
+                    <img src="https://image.flaticon.com/icons/svg/148/148839.svg" for="star rating gold">
+                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+                    <img src="https://image.flaticon.com/icons/svg/149/149220.svg" for="star rating empty">
+                  </div>
+                  <button for="expand" class="expand-button js-expand">+</button>
+                </li>
+                </div>
+                    `;}
   };
 
   // filter funtion, event listener on selection value of dropdown "minimum rating", only show certain LIs
@@ -127,7 +194,6 @@ const bookmarks = (function() {
         }
       }
       // STORE.list.rating.filter(filterBy)
-      bindListeners();
     } );
   };
 
@@ -135,33 +201,48 @@ const bookmarks = (function() {
   // both filtered and non-filtered views
 
   const detailView = function() {
-    $('.bookmark-list').on('click', '.bookmark-li', function(event) {
-      
-      const id = $(event.currentTarget).attr('id');
-      const currentItem = STORE.findById(id);
+    $('.js-bookmark-list').on('click', '.js-expand', function(event) {
+      if ( STORE.expanded === null ) {
+        event.preventDefault();
+        console.log('expand button clicked');
 
-      console.log(currentItem);
+        const id = $(event.currentTarget).parents('li').attr('id');
+        const currentItem = STORE.findById(id);
 
-      STORE.expanded(id);
+        console.log(currentItem);
 
-      htmlTheBookmark(currentItem);
-      
-      bindListeners();
-      
+        STORE.setExpanded(currentItem.id);
+        console.log(STORE.expanded);
+        render();
+      }
     });
+  };
+
+  const detailViewClosed = function() {
+    if ( STORE.expanded !== null ) {
+      $('.js-bookmark-list').on('click', '.js-expand', function(event) {
+        event.preventDefault();
+        console.log( 'close it up' );
+        // set expanded back to null after expanded in render
+        STORE.setExpanded(null);
+        // re-render as closed
+        render();
+      });
+    }
   };
 
   // delete function, event listener on click to delete bookmark
 
-  const deleteBookmark = function(id) {
-    $('.bookmark-li').on('click', '.delete-bookmark', function(event) {
+  const deleteBookmark = function() {
+    $('.js-bookmark-list').on('click', '.delete-bookmark', function(event) {
+      console.log('delete button is running');
       event.preventDefault();
-      const currentItem = $(event.currentTarget).findById(id);
+      const currentItem = $(event.currentTarget).closest('li').attr('id');
+      console.log(currentItem);
       $(event.currentTarget).closest('li').remove();
-      api.deleteItem(currentItem);
-
-      // $('.bookmark-li').remove();
-      bindListeners();
+      STORE.
+        api.deleteItem(currentItem);
+      render();
     });
   };
 
@@ -171,8 +252,6 @@ const bookmarks = (function() {
         const deletionId = STORE.list[i].id;
         api.deleteItem(deletionId);
       }
-      bindListeners();
-      // render();
     });
   };
 
@@ -183,23 +262,26 @@ const bookmarks = (function() {
 
     let items = [...STORE.list];
 
+    console.log(items);
+
     if ( items.hidden ) {
       items = items.filter(item => !item.hidden);
     }
     if ( items.rating <= $('#filter-rating').val() ) {
       items = items.filter(item => item.rating.includes(this));
     }
-    
-    for ( let i = 0; i < items.length; i++ ) {
-      console.log( items[i] );
-      htmlTheBookmark( items[i] );
-    }
+    const bookmarkElements= [];
 
+    for ( let i = 0; i < (items.length - 1); i++ ) {
+      bookmarkElements.push(htmlTheBookmark( items[i] ));
+    }
+    $('.js-bookmark-list').html(bookmarkElements);
   };
 
   const bindListeners = function() {
     listenToAddBookmark();
     detailView();
+    detailViewClosed();
     filterByRating();
     deleteBookmark();
     clearAllBookmarks();

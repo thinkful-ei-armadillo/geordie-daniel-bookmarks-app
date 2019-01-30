@@ -77,13 +77,13 @@ Our bookmarks app is coming along well - we have achieved successful:
 * API DELETEs (in two forms, individual delete button and clear all bookmarks)
 
 To Complete Today:
-* Fix issue with first JSON object printing twice
+* ~~Fix issue with first JSON object printing twice~~
 * Expand/detailed view
    * Originally attempted by using toggleClass( hidden ), but this would only work in one direction. Now attempting by re-rendering the selected item with our template function.
    * Ensure that it switches back to condensed view on re-click
 * Filtered view with minimum rating
 * Get "Visit Site" button/link working
-* Starring dynamically by reading current STORE.list.rating value and rendering appropriate number of stars accordingly.
+* ~~Starring dynamically by reading current STORE.list.rating value and rendering appropriate number of stars accordingly.~~
 * User-side feedback for error handling
 * Beautify with CSS
 
@@ -94,12 +94,19 @@ To Complete Today:
 
 ADD CORRECT SELECTOR TO HTML THE BOOKMARK
 
+use serializeJson to get better form data handling
+
 use 
 const id = $(event.currentTarget).attr('id');
 const currentItem = STORE.findById(id);
 
 
 use button for expanding items?? easier to target for user, more accessible
+
+also, use expanded in store to hold the id of current expanded item - makes it easier to change state and re-render!
+
+
+for rating - just have different '.rating-view' section templates for each rating value within render
 
 
 

@@ -13,17 +13,20 @@ $.fn.extend({
 
 
 $(document).ready( function() {
+
   console.log(bookmarks);
+  
   bookmarks.bindListeners();
   bookmarks.render();
+  
   api.getItems()
     .then((items) => {
-      console.log(api.getItems());
       items.forEach((item) => {
         // console.log(item);
         STORE.addItem(item);
-        console.log(STORE.list);
+        // console.log(STORE.list);
         bookmarks.render();
       });
     });
+  
 });
