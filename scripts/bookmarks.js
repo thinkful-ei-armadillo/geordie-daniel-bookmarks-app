@@ -50,12 +50,19 @@ const bookmarks = (function() {
 
       console.log(bookmarkObj);
       console.log(STORE.list);
+      
 
-      STORE.list.push(bookmarkObj);
-      api.createItem(bookmarkTitle, bookmarkUrl, bookmarkDesc, bookmarkRating);
+      api.createItem(bookmarkTitle, bookmarkUrl, bookmarkDesc, bookmarkRating)
+        .then( response => {
+          STORE.list.push(response);
+          render();
+        } );
+      
+      // STORE.list.push(bookmarkObj);
+      
       
       // create HTML bookmark with new stored values
-      render();
+      // render();
 
       // reload standard main view once submit completes
       $('.js-main-view').html(`
@@ -218,13 +225,20 @@ const bookmarks = (function() {
     $('.js-bookmark-list').on('click', '.delete-bookmark', function(event) {
       console.log('delete button is running');
       event.preventDefault();
+
       const currentItem = $(event.currentTarget).closest('li').attr('id');
       console.log(currentItem);
-      $(event.currentTarget).closest('li').remove();
+
+      // $(event.currentTarget).closest('li').remove();
+
       const currentItemInStore = STORE.findById(currentItem);
-      STORE.list.splice(STORE.list.indexOf(currentItemInStore), 1);
-      api.deleteItem(currentItem);
-      render();
+
+      api.deleteItem(currentItem)
+        .then( () => {
+          STORE.expanded = null;
+          STORE.list.splice(STORE.list.indexOf(currentItemInStore), 1);
+          render();
+        });
     });
   };
 

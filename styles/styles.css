@@ -2,14 +2,30 @@
   display: none;
 }
 
+button, select {
+  background-color: #FAFBFC;
+  border-radius: 4px;
+}
+
 body {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
+  background-color: #27476E;
+  color: #fff;
 }
 
 .master-container {
-  width: 85%;
+  width: 70%;
   margin: 0 auto;
+}
+
+.header {
+  margin: 0 auto;
+  background-color: 006992;
+}
+
+h1 {
+  text-shadow: 2px 2px #333;
 }
 
 .bookmark-list {
@@ -17,16 +33,23 @@ body {
 }
 
 .bookmark-li {
+  background-color: #006992;
+  width: 80%;
+  margin: 10px auto;
   list-style: none;
-  border: 2px solid #777;
-  margin: 10px;
+  border: 2px solid #ED8A19;
   padding: 30px;
-  box-shadow: 2px 2px #e0e0e0;
+  box-shadow: 4px 4px #001D4A;
+  border-radius: 6px;
 }
 
 .bookmark-li > h3 {
   margin: 5px;
-  text-shadow: 1px 1px #ececec;
+  text-shadow: 2px 2px #333;
+}
+
+.bookmark-li > p {
+  font-size: 16px;
 }
 
 .rating-view {
@@ -35,10 +58,16 @@ body {
 }
 
 .rating-view > img {
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
 }
 
 .expand-button, .close-button {
+  font-size: 14px;
   float: right;
+  border: 2px;
+  width: 50px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px #333;
 }
