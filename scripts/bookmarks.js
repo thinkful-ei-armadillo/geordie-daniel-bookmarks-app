@@ -68,7 +68,7 @@ const bookmarks = (function() {
 
   const htmlTheBookmark = function(bookmark){
     if ( bookmark.expand ) {
-      $('.js-bookmark-list').children('.js-bookmark-li').html(`
+      $('.js-bookmark-list').append(`
       <div class="bookmark-item-wrapper js-bookmark-item-wrapper">
         <li class="bookmark-li" id="${bookmark.id}">
           <h3 class="bookmark-title">${bookmark.title}</h3>
@@ -188,7 +188,7 @@ const bookmarks = (function() {
     
     for ( let i = 0; i < items.length; i++ ) {
       console.log( items[i] );
-      htmlTheBookmark(items[i]);
+      htmlTheBookmark( items[i] );
     }
 
   };

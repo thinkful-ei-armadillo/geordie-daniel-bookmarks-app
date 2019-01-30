@@ -85,3 +85,26 @@ To Complete Today:
 * Starring dynamically by reading current STORE.list.rating value and rendering appropriate number of stars accordingly.
 * User-side feedback for error handling
 * Beautify with CSS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

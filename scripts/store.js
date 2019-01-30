@@ -24,10 +24,14 @@ const STORE = (function() {
 
   const expanded = function(id) {
     const selectedItem = STORE.findById(id);
+
     console.log(selectedItem);
     console.log(selectedItem.expand);
+
     selectedItem.expand = !selectedItem.expand;
+
     console.log(selectedItem.expand);
+    bookmarks.render();
   };
 
   return {
