@@ -31,7 +31,7 @@ const STORE = (function() {
     selectedItem.expand = !selectedItem.expand;
 
     console.log(selectedItem.expand);
-    bookmarks.render();
+    // bookmarks.render();
   };
 
   return {
