@@ -15,17 +15,17 @@
 ⋅⋅* rating (number, 1-5)
 
 2. I can see a list of my bookmarks when I first open the app
-  * All bookmarks in the list default to a "condensed" view showing only title    and rating
+  * All bookmarks in the list default to a "condensed" view showing only title and rating
 
 3. I can click on a bookmark to display the "detailed" view
-  * DEtailed view additionally contains decription and a "visit site" link
+  * Detailed view additionally contains decription and a "visit site" link
 
 4. I can remove bookmarks from my bookmark list
 
 5. I receive appropriate server feedback when I cannot add/update a bookmark
   * See API validations
 
-6. I can select from a dropdown a "minimum rating" to filter the lists by all       bookmarks rated equal or above the selected rating
+6. I can select from a dropdown a "minimum rating" to filter the lists by all bookmarks rated equal or above the selected rating
 
 
 ### Using .serializeArray() method

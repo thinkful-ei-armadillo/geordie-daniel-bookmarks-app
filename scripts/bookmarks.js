@@ -1,5 +1,5 @@
 'use strict';
-/* global Item $ STORE api */
+/* global Item $ STORE api bookmarks */
 
 const bookmarks = (function() {
 
@@ -49,8 +49,7 @@ const bookmarks = (function() {
       console.log(STORE.list);
 
       STORE.list.push(bookmarkObj);
-      api.createItem(bookmarkTitle, bookmarkUrl, 
-        bookmarkDesc, bookmarkRating);
+      api.createItem(bookmarkTitle, bookmarkUrl, bookmarkDesc, bookmarkRating);
 
       htmlTheBookmark(bookmarkObj);
       $('.js-main-view').html(`
@@ -101,24 +100,24 @@ const bookmarks = (function() {
       .data('item-id');
   };
 
-  const findById = function(id) {
-    return STORE.list.find(list => list.id === id);
-  };
-
   // detailed view function, event listener on click of LI to expand into detailed view, should work in
   // both filtered and non-filtered views
 
-  const detailView = function(id) {
+  const detailView = function() {
     $('.bookmark-list').on('click', '.bookmark-li', function(event) {
     // $(event.currentTarget).toggleClass('selected');
     // $('.description').toggleClass('hidden');
     // $('.bookmark-link').toggleClass('hidden');
     // $('.delete-bookmark').toggleClass('hidden');
-    
-      const id = getItemIdFromElement(event.currentTarget);
-      const currentItem = STORE.list.findById(id);
+      
+      const id = $(event.currentTarget).closest('h3') ;
+      const currentItem = STORE.findById(id);
 
-      $('.bookmark-list').find(event.currentTarget).html(`
+      console.log(id);
+
+      STORE.expanded(currentItem);
+
+      $('.bookmark-list').closest('li').html(`
     <li class="bookmark-li">
         <h3 class="bookmark-title">${currentItem.title}</h3>
         <p class="description hidden">
@@ -139,12 +138,34 @@ const bookmarks = (function() {
 
   // delete function, event listener on click to delete bookmark
 
-  const deleteBookmark = function() {
+  const deleteBookmark = function(id) {
     $('.bookmark-li').on('click', '.delete-bookmark', function(event) {
       event.preventDefault();
-      $('.bookmark-li').remove();
+      const currentItem = $(event.currentTarget).findById(id);
+      $(event.currentTarget).closest('li').remove();
+      api.deleteItem(currentItem);
+
+      // $('.bookmark-li').remove();
       bindListeners();
     });
+  };
+
+  // render function tying things together based upon store booleans
+
+  const render = function() {
+    console.log('`render` ran');
+    let items = [...STORE.list];
+    if (STORE.hidden) {
+      items = items.filter(item => !item.hidden);
+    }
+    if (STORE.rating <= $('#filter-rating').val()) {
+      items = items.filter(item => item.rating.includes(this));
+    }
+    
+    for ( let i = 0; i < STORE.list.length; i++ ) {
+      htmlTheBookmark(STORE.list[i]);
+    }
+
   };
 
   const bindListeners = function() {
@@ -154,10 +175,8 @@ const bookmarks = (function() {
     deleteBookmark();
   };
 
-
-
   return {
-    // render: renderTheBookmarkApp(),
+    render: render,
     bindListeners: bindListeners
   };
 

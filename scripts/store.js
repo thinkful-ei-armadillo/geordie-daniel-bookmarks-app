@@ -10,20 +10,20 @@ const STORE = (function() {
     this.list.push(item);
   };
 
-  const adding = function(boolean) {
-    return boolean;
+  const findById = function(id) {
+    return STORE.list.find(list => list.id === id);
   };
 
-  const expanded = function(id, boolean) {
-    const selectedItem = STORE.list.findById(id);
-    selectedItem.expanded = boolean; //make sure to toggle back at some point
+  const expanded = function(id) {
+    const selectedItem = STORE.findById(id);
+    STORE.expanded = !STORE.expanded; //make sure to toggle back at some point
   };
 
   return {
     list: [],
     addItem,
-    adding,
     expanded,
     hidden: false,
+    findById
   };
 }());
