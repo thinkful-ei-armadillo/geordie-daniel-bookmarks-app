@@ -1,5 +1,5 @@
 'use strict';
-/* global Item $ STORE api bookmarks */
+/* global $ STORE api bookmarks */
 
 const bookmarks = (function() {
 
@@ -8,21 +8,21 @@ const bookmarks = (function() {
   const listenToAddBookmark = function() {
     $('.js-main-view').on( 'click', '.add-bookmark-button', function(event) {
       event.preventDefault();
-      console.log('add button triggered');
+      
       $('.js-main-view').html(`
-    <form class="create-bookmark-form js-create-bookmark-form">
-    <input type="text" class="bookmark-title" name="title" placeholder="title" required>
-    <input type="text" class="url-input" name="url" placeholder="website link" value="https://" required>
-    <input type="text" class="description-input" name="description" placeholder="description" required>
-    <select id="rating-input" name="rating" value="Give a Rating" required>
-      <option value="">Give a Rating</option>
-      <option value="5">5 Stars</option>
-      <option value="4">4 Stars</option>
-      <option value="3">3 Stars</option>
-      <option value="2">2 Stars</option>
-      <option value="1">1 Star</option>
+    <form class="create-bookmark-form js-create-bookmark-form" for="creating a new bookmark">
+    <input type="text" class="bookmark-title" name="title" placeholder="title" for="bookmark title" required>
+    <input type="text" class="url-input" name="url" for="website link" value="https://" required>
+    <input type="text" class="description-input" name="description" for="website description" placeholder="description" required>
+    <select id="rating-input" name="rating" for="selecting a rating for your bookmark" value="Give a Rating" required>
+      <option value="" for="placeholder selection">Give a Rating</option>
+      <option value="5" for="select 5 Stars rating">5 Stars</option>
+      <option value="4" for="select 4 Stars rating">4 Stars</option>
+      <option value="3" for="select 3 Stars rating">3 Stars</option>
+      <option value="2" for="select 2 Stars rating">2 Stars</option>
+      <option value="1" for="select 1 Stars rating">1 Star</option>
     </select>
-    <input type="submit" class="create-submit" name="submit" value="Submit">
+    <input type="submit" class="create-submit" name="submit" for="submitting the form" value="Submit">
   </form>
     `);
       createBookmark();
@@ -39,30 +39,12 @@ const bookmarks = (function() {
       const bookmarkUrl = $('.url-input').val();
       const bookmarkDesc = $('.description-input').val();
       const bookmarkRating = $('#rating-input').val();
-      console.log(bookmarkRating);
-
-      // const bookmarkObjData = $(this).serializeJson();
-
-      // console.log(bookmarkObjData.rating);
-
-      const bookmarkObj = Item.create(bookmarkTitle, bookmarkUrl, 
-        bookmarkDesc, bookmarkRating);
-
-      console.log(bookmarkObj);
-      console.log(STORE.list);
-      
 
       api.createItem(bookmarkTitle, bookmarkUrl, bookmarkDesc, bookmarkRating)
         .then( response => {
           STORE.list.push(response);
           render();
         } );
-      
-      // STORE.list.push(bookmarkObj);
-      
-      
-      // create HTML bookmark with new stored values
-      // render();
 
       // reload standard main view once submit completes
       $('.js-main-view').html(`
@@ -75,7 +57,7 @@ const bookmarks = (function() {
             <option value="2">2 Stars</option>
             <option value="1">1 Star</option>
           </select>
-          <button class="clear-all js-clear-all">Clear All Bookmarks</button>`);
+          `);
     } );
   };
 
@@ -176,7 +158,7 @@ const bookmarks = (function() {
     $('.js-main-view').on( 'change', '#filter-rating', function(event) {
       event.preventDefault();
       const filterBy = $('#filter-rating').val();
-      console.log(filterBy);
+      
       filterByRating(filterBy);
       render();
     } );
@@ -189,16 +171,14 @@ const bookmarks = (function() {
     $('.js-bookmark-list').on('click', '.js-expand', function(event) {
       if ( STORE.expanded === null ) {
         event.preventDefault();
+
         console.log('expand button clicked');
 
         const id = $(event.currentTarget).parents('li').attr('id');
         const currentItem = STORE.findById(id);
 
-        console.log(currentItem);
-
         STORE.setExpanded(currentItem.id);
-        console.log(STORE.expanded);
-        // $('.js-expand').toggleClass('js-expand', true);
+
         render();
         detailViewClosed();
       }
@@ -207,10 +187,11 @@ const bookmarks = (function() {
 
   const detailViewClosed = function() {
     if ( STORE.expanded !== null ) {
-      console.log( 'close it up' );
+
       $('.js-bookmark-list').on('click', '.js-close', function(event) {
         event.preventDefault();
         console.log( 'close it up' );
+
         // set expanded back to null after expanded in render
         STORE.setExpanded(null);
         // re-render as closed
@@ -223,7 +204,7 @@ const bookmarks = (function() {
 
   const deleteBookmark = function() {
     $('.js-bookmark-list').on('click', '.delete-bookmark', function(event) {
-      console.log('delete button is running');
+      
       event.preventDefault();
 
       const currentItem = $(event.currentTarget).closest('li').attr('id');
@@ -242,21 +223,9 @@ const bookmarks = (function() {
     });
   };
 
-  const clearAllBookmarks = function() {
-    $('.js-main-view').on( 'click', '.js-clear-all', function() {
-      for ( let i = 0; i , STORE.list.length; i++ ){
-        const deletionId = STORE.list[i].id;
-        // STORE.findById(deletionId).splice(STORE.list.indexOf(deletionId), 1);
-        api.deleteItem(deletionId);
-        render();
-      }
-    });
-  };
-
   // render function tying things together based upon store booleans
 
   const render = function() {
-    console.log('`render` ran');
 
     let items = [...STORE.list];
     
@@ -276,7 +245,6 @@ const bookmarks = (function() {
     ratingRender();
     handleFilter();
     deleteBookmark();
-    clearAllBookmarks();
   };
 
   return {

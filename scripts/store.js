@@ -11,17 +11,12 @@ const STORE = (function() {
   };
 
   const findById = function(id) {
-    console.log(id); 
+     
     return this.list.find(list => list.id === id);
   };
 
   const setExpanded = function(id) {
-    // const selectedItem = STORE.findById(id);
-
     this.expanded = id;
-
-    console.log(this.expanded);
-    // bookmarks.render();
   };
 
   return {
@@ -29,7 +24,6 @@ const STORE = (function() {
     addItem,
     setExpanded,
     expanded: null,
-    hidden: false,
     findById
   };
 }());

@@ -1,5 +1,7 @@
 html {
-  background: radial-gradient(#ececec, #27476E);
+  background: #606c88;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #3f4c6b, #606c88);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #3f4c6b, #606c88); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .hidden {
@@ -38,19 +40,19 @@ h1 {
 }
 
 .bookmark-li {
-  background-color: #006992;
+  background-color: #606c88;
   width: 80%;
   margin: 10px auto;
   list-style: none;
-  border: 2px solid #ED8A19;
+  border: 2px solid #7C90A0;
   padding: 30px;
-  box-shadow: 4px 4px #27476E;
+  box-shadow: 4px 4px #3f4c6b;
   border-radius: 6px;
 }
 
 .bookmark-li > h3 {
   margin: 5px;
-  text-shadow: 2px 2px #333;
+  text-shadow: 2px 2px #3f4c6b;
   font-weight: 100;
   font-size: 24px;
 }
@@ -73,8 +75,8 @@ h1 {
   font-size: 14px;
   float: right;
   border: 2px;
-  width: 50px;
+  width: 30px;
   height: 20px;
   border-radius: 4px;
-  box-shadow: 2px 2px #333;
+  box-shadow: 2px 2px #3f4c6b;
 }
