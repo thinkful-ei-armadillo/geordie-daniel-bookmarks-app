@@ -16,7 +16,8 @@ const bookmarks = (function() {
   };
 
   const editingViewRender = function() {
-    return `<form class="create-bookmark-form js-create-bookmark-form" for="creating a new bookmark">
+    console.log('editing render fired');
+    $('.js-main-view').html(`<form class="create-bookmark-form js-create-bookmark-form" for="creating a new bookmark">
     <input type="text" class="bookmark-title" name="title" placeholder="title" for="bookmark title" required>
     <input type="text" class="url-input" name="url" for="website link" value="https://" required>
     <input type="text" class="description-input" name="description" for="website description" placeholder="description" required>
@@ -29,11 +30,12 @@ const bookmarks = (function() {
       <option value="1" for="select 1 Stars rating">1 Star</option>
     </select>
     <input type="submit" class="create-submit" name="submit" for="submitting the form" value="Submit">
-  </form>`;
+  </form>`);
   };
 
   const mainViewRender = function() {
-    return `
+    console.log('mainview render fired');
+    $('.js-main-view').html(`
         <button class="add-bookmark-button" value="Add Bookmark">Add Bookmark</button>
           <select id="filter-rating" name="filter" value="Minimum Rating">
               <option value="">Minimum Rating</option>
@@ -43,7 +45,7 @@ const bookmarks = (function() {
             <option value="2">2 Stars</option>
             <option value="1">1 Star</option>
           </select>
-      `;
+      `);
   };
 
   // create bookmark function, event listener on submit of form to put user data into store and API
