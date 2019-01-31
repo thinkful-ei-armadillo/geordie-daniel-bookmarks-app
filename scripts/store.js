@@ -24,6 +24,7 @@ const STORE = (function() {
     addItem,
     setExpanded,
     expanded: null,
+    errorHandling: false,
     findById
   };
 }());

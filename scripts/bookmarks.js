@@ -9,8 +9,14 @@ const bookmarks = (function() {
     $('.js-main-view').on( 'click', '.add-bookmark-button', function(event) {
       event.preventDefault();
       
-      $('.js-main-view').html(`
-    <form class="create-bookmark-form js-create-bookmark-form" for="creating a new bookmark">
+      editingViewRender();
+      
+      createBookmark();
+    });
+  };
+
+  const editingViewRender = function() {
+    return `<form class="create-bookmark-form js-create-bookmark-form" for="creating a new bookmark">
     <input type="text" class="bookmark-title" name="title" placeholder="title" for="bookmark title" required>
     <input type="text" class="url-input" name="url" for="website link" value="https://" required>
     <input type="text" class="description-input" name="description" for="website description" placeholder="description" required>
@@ -23,16 +29,27 @@ const bookmarks = (function() {
       <option value="1" for="select 1 Stars rating">1 Star</option>
     </select>
     <input type="submit" class="create-submit" name="submit" for="submitting the form" value="Submit">
-  </form>
-    `);
-      createBookmark();
-    });
+  </form>`;
+  };
+
+  const mainViewRender = function() {
+    return `
+        <button class="add-bookmark-button" value="Add Bookmark">Add Bookmark</button>
+          <select id="filter-rating" name="filter" value="Minimum Rating">
+              <option value="">Minimum Rating</option>
+            <option value="5">5 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="2">2 Stars</option>
+            <option value="1">1 Star</option>
+          </select>
+      `;
   };
 
   // create bookmark function, event listener on submit of form to put user data into store and API
 
   const createBookmark = function() {
-    $('.js-create-bookmark-form').on('submit', function(event) {
+    $('.js-main-view').on('submit', '.js-create-bookmark-form', function(event) {
       event.preventDefault();
 
       const bookmarkTitle = $('.bookmark-title').val();
@@ -47,17 +64,7 @@ const bookmarks = (function() {
         } );
 
       // reload standard main view once submit completes
-      $('.js-main-view').html(`
-        <button class="add-bookmark-button" value="Add Bookmark">Add Bookmark</button>
-          <select id="filter-rating" name="filter" value="Minimum Rating">
-              <option value="">Minimum Rating</option>
-            <option value="5">5 Stars</option>
-            <option value="4">4 Stars</option>
-            <option value="3">3 Stars</option>
-            <option value="2">2 Stars</option>
-            <option value="1">1 Star</option>
-          </select>
-          `);
+      mainViewRender();
     } );
   };
 
